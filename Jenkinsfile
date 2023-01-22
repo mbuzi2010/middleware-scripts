@@ -1,32 +1,14 @@
 pipeline {
     agent any
-    triggers {
-  pollSCM('* * * * *')
-    }
-    stages {
-        stage('Hello') {
-            steps {
-                echo 'Hello '
-                sleep 5
+
+    stages{
+        stage("create zip file"){
+            steps{
+               
+           sh 'zip middlewareScript-${BUILD_NUMBER}.zip * --exclude Jenkinsfile README.md'  
+            
             }
         }
-          stage('build') {
-            steps {
-                echo 'build'
-                sleep 5
-            }
-        }
-          stage('test') {
-            steps {
-                echo 'test'
-                sleep 5
-            }
-        }
-          stage('deploy') {
-            steps {
-                echo 'deploy'
-                sleep 4
-            }
-        }
+        
     }
 }
